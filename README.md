@@ -9,7 +9,7 @@ A cordova plugin to launch a url in chrome custom tabs. Currently it supports on
 
 #### cordova.customtabs.isAvailable(successCallback, errorCallback)
 
-Invoke **successCallback** if custom tabs is available in the device, else ** errorCallback** is invoked.
+Invoke **successCallback** if custom tabs is available in the device, else **errorCallback** is invoked.
 
 #### cordova.customtabs.launch(url, successCallback)
 
