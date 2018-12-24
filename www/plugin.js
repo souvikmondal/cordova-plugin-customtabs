@@ -12,6 +12,10 @@ var customtabs = {
         exec(success, error, PLUGIN_NAME, "launch", [url]);
     },
 
+    launchInBrowser(url, success, error) {
+        exec(success, error, PLUGIN_NAME, "launchInBrowser", [url]);
+    },
+
     close(success, error) {
         exec(success, error, PLUGIN_NAME, "close", []);
     },
