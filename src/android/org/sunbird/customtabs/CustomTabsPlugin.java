@@ -1,6 +1,7 @@
 package org.sunbird.customtabs;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -19,7 +20,7 @@ public class CustomTabsPlugin extends CordovaPlugin {
     private static final String ACTION_LAUNCH_BROWSER = "launchInBrowser";
     private static final String ACTION_CLOSE = "close";
 
-    private static CallbackContext tokenCallbackContext;
+    private static CordovaContext tokenCallbackContext;
 
     private CustomTabsHelper customTabsHelper;
     private boolean isCustomTabsAvailable;
@@ -44,12 +45,12 @@ public class CustomTabsPlugin extends CordovaPlugin {
                 handled = true;
                 break;
             case ACTION_LAUNCH:
-                tokenCallbackContext = callbackContext;
+                tokenCallbackContext = new CordovaContext(cordova.getActivity(), callbackContext);
                 customTabsHelper.launchUrl(args.getString(0), cordova.getActivity());
                 handled = true;
                 break;
             case ACTION_LAUNCH_BROWSER:
-                tokenCallbackContext = callbackContext;
+                tokenCallbackContext = new CordovaContext(cordova.getActivity(), callbackContext);
                 launchUrlInBrowser(args.getString(0));
                 handled = true;
                 break;
@@ -73,9 +74,10 @@ public class CustomTabsPlugin extends CordovaPlugin {
         }
     }
 
-    public static void onTokenRecieved(String token) {
+    public static void onTokenRecieved(String token, Context context) {
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, token);
         pluginResult.setKeepCallback(true);
-        tokenCallbackContext.sendPluginResult(pluginResult);
+        tokenCallbackContext.getCallbackContext().sendPluginResult(pluginResult);
+        context.startActivity(new Intent(context, tokenCallbackContext.getCordovaMainActivity().getClass()));
     }
 }

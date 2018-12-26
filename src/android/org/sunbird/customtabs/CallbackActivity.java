@@ -14,7 +14,7 @@ public class CallbackActivity extends Activity {
         Intent in = getIntent();
         Uri data = in.getData();
         String callBackUrl = data.toString();
-        CustomTabsPlugin.onTokenRecieved(callBackUrl);
+        CustomTabsPlugin.onTokenRecieved(callBackUrl, this);
         finish();
     }
 
