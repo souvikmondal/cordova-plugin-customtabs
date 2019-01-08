@@ -4,19 +4,19 @@ var PLUGIN_NAME = 'customtabs';
 
 var customtabs = {
 
-    isAvailable(success, error) {
+    isAvailable: function(success, error) {
         exec(success, error, PLUGIN_NAME, "isAvailable", []);
     },
 
-    launch(url, success, error) {
+    launch: function(url, success, error) {
         exec(success, error, PLUGIN_NAME, "launch", [url]);
     },
 
-    launchInBrowser(url, success, error) {
+    launchInBrowser: function(url, success, error) {
         exec(success, error, PLUGIN_NAME, "launchInBrowser", [url]);
     },
 
-    close(success, error) {
+    close: function(success, error) {
         exec(success, error, PLUGIN_NAME, "close", []);
     },
 
